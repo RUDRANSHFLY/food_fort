@@ -141,6 +141,23 @@ exports.Prisma.RestaurantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MenuItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  restaurantId: 'restaurantId'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  totalPrice: 'totalPrice',
+  status: 'status',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -169,9 +186,17 @@ exports.Country = exports.$Enums.Country = {
   BHUTAN: 'BHUTAN'
 };
 
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
-  Restaurant: 'Restaurant'
+  Restaurant: 'Restaurant',
+  MenuItem: 'MenuItem',
+  Order: 'Order'
 };
 
 /**
