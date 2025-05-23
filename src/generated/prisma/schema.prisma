@@ -14,14 +14,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role{
+enum Role {
   ADMIN
   MANAGER
   MEMBER
 }
 
-
-enum Country{
+enum Country {
   INDIA
   NEPAL
   FRANCE
@@ -29,26 +28,23 @@ enum Country{
   BHUTAN
 }
 
-model User{
-  id String @id @default(uuid())
-  role Role
-  name String?
-  email String? @unique
-  emailVerfied DateTime?
-  image String?
+model User {
+  id             String    @id @default(uuid())
+  role           Role
+  name           String?
+  email          String?   @unique
+  emailVerfied   DateTime?
+  image          String?
   hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+}
+
+model Restaurant {
+  id        String   @id @default(uuid())
+  name      String
+  country   Country
+  address   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
-
-
-model Restaurant{
-  id String @id @default(uuid())
-  name String
-  country Country
-  address String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-}
-
-
