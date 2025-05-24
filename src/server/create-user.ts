@@ -1,7 +1,7 @@
 "use server"
 
 
-import type { User } from "@prisma-db-1/client";
+import { User } from "@/generated/prisma";
 import { prisma } from "@/lib/client";
 import { genSalt, hash } from "bcrypt-ts";
 

@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum Country {
+  INDIA
+  NEPAL
+  FRANCE
+  AMERICA
+  BHUTAN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model User {
+  id             String    @id @default(uuid())
+  role           Role
+  name           String?
+  email          String?   @unique
+  emailVerfied   DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+
+  orders Order[]
+}
+
+model Restaurant {
+  id        String   @id @default(uuid())
+  name      String
+  country   Country
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  MenuItem MenuItem[]
+}
+
+model MenuItem {
+  id         String     @id @default(uuid())
+  name       String
+  price      Float
+  type       String?
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now())
+
+  restaurantId String
+
+  Order Order[]
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  user       User        @relation(fields: [userId], references: [id])
+  totalPrice Float
+  status     OrderStatus
+  userId     String
+  items      MenuItem[]
+}
